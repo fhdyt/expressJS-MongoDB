@@ -31,4 +31,31 @@ router.post('/feedback', async (req, res) => {
   }
 });
 
+router.put('/feedback', async (req, res) => {
+  const { _id, subject, desc } = req.body;
+  if (!subject || !desc) {
+    return res
+      .status(422)
+      .send({ error: 'You must provide a Subject and Description' });
+  }
+
+  try {
+    const feedback = await Feedback.findByIdAndUpdate( _id, { subject, desc });
+    res.send({ status: 'success' });
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
+router.delete('/feedback', async (req, res) => {
+  const _id  = req.body;
+
+  try {
+    const feedback = await Feedback.findByIdAndRemove( _id );
+    res.send({ status: 'success' });
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
 module.exports = router;
