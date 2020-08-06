@@ -21,7 +21,9 @@ if (!mongoUri) {
 }
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true  
 });
 mongoose.connection.on('connected', () => {
   console.log('Connected to mongo instance');
