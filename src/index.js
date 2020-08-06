@@ -8,7 +8,7 @@ const feedbackRoutes = require('./routes/feedbackRoutes');
 const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
-
+const PORT = process.env.PORT || 3000
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(feedbackRoutes);
@@ -34,6 +34,6 @@ app.get('/', (req, res) => {
   res.send('Welcome');
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
